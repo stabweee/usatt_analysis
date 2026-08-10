@@ -9,15 +9,18 @@ import scipy.stats as ss
 from scipy.optimize import curve_fit
 from sklearn.linear_model import LinearRegression
 
-from load_data.load import load_stats
+import sys
+
+sys.path.insert(0, "../load_data")
+from load import load_stats
 
 pd.options.mode.chained_assignment = None
 
 
 # ----- Load Data -----
 players = load_stats()
-players_train = pd.read_csv("top_juniors/players_training_set.csv")
-history_train = pd.read_csv("top_juniors/history_training_set.csv")
+players_train = pd.read_csv("./players_training_set.csv")
+history_train = pd.read_csv("./history_training_set.csv")
 
 tj = players_train[players_train["Top Junior"] == True]
 ntj = players_train[players_train["Top Junior"] == False]
@@ -264,5 +267,5 @@ def log_reg_analysis(player):
     return player_prob
 
 
-me = players[players["USATT#"] == 84904].iloc[0]
+me = players[players["USATT#"] == 280573].iloc[0]
 log_reg_analysis(me)
